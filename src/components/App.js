@@ -13,6 +13,7 @@ class App extends React.Component {
       // arbitrary methods are automatically bound only when using React.createClass
       this.loadSamples = this.loadSamples.bind(this)
       this.addFish = this.addFish.bind(this)
+      this.addToOrder = this.addToOrder.bind(this)
 
       // equivalent to React.createClass' getInitialState()
       this.state = {
@@ -26,6 +27,7 @@ class App extends React.Component {
   }
 
   addFish(fish) {
+    // copy fish state
     const fishes = {...this.state.fishes}
     const timestamp = Date.now()
 
@@ -33,6 +35,17 @@ class App extends React.Component {
 
     // shorthand for this.setState({fishes: fishes})
     this.setState({fishes})
+  }
+
+  addToOrder(key) {
+    // copy order state
+    const order = {...this.state.order}
+
+    // set to 1 if order[key] is undefined  
+    order[key] = order[key] + 1 || 1
+
+    // shorthand for this.setState({order: order})
+    this.setState({order})
   }
 
   render() {
@@ -43,7 +56,7 @@ class App extends React.Component {
           <ul>
             {
               Object.keys(this.state.fishes)
-                .map(key => <Fish key={key} details={this.state.fishes[key]} />)
+                .map(key => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder} />)
             }
           </ul>
         </div>
