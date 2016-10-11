@@ -41,7 +41,7 @@ class App extends React.Component {
     // copy order state
     const order = {...this.state.order}
 
-    // set to 1 if order[key] is undefined  
+    // set to 1 if order[key] is undefined
     order[key] = order[key] + 1 || 1
 
     // shorthand for this.setState({order: order})
@@ -60,7 +60,7 @@ class App extends React.Component {
             }
           </ul>
         </div>
-        <Order/>
+        <Order fishes={this.state.fishes} order={this.state.order} />
         <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
       </div>
     )
