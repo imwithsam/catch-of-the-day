@@ -14,6 +14,7 @@ class App extends React.Component {
       // arbitrary methods are automatically bound only when using React.createClass
       this.loadSamples = this.loadSamples.bind(this)
       this.addFish = this.addFish.bind(this)
+      this.updateFish = this.updateFish.bind(this)
       this.addToOrder = this.addToOrder.bind(this)
 
       // equivalent to React.createClass' getInitialState()
@@ -59,6 +60,14 @@ class App extends React.Component {
     this.setState({fishes})
   }
 
+  updateFish(key, updatedFish) {
+    const fishes = {...this.state.fishes}
+
+    fishes[key] = updatedFish
+
+    this.setState({fishes})
+  }
+
   addToOrder(key) {
     // copy order state
     const order = {...this.state.order}
@@ -83,7 +92,7 @@ class App extends React.Component {
           </ul>
         </div>
         <Order fishes={this.state.fishes} order={this.state.order} />
-        <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
+        <Inventory fishes={this.state.fishes} addFish={this.addFish} updateFish={this.updateFish} loadSamples={this.loadSamples} />
       </div>
     )
   }
