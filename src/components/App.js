@@ -15,7 +15,9 @@ class App extends React.Component {
       this.loadSamples = this.loadSamples.bind(this)
       this.addFish = this.addFish.bind(this)
       this.updateFish = this.updateFish.bind(this)
+      this.removeFish = this.removeFish.bind(this)
       this.addToOrder = this.addToOrder.bind(this)
+      this.removeFromOrder = this.removeFromOrder.bind(this)
 
       // equivalent to React.createClass' getInitialState()
       this.state = {
@@ -68,6 +70,14 @@ class App extends React.Component {
     this.setState({fishes})
   }
 
+  removeFish(key) {
+    const fishes = {...this.state.fishes}
+
+    fishes[key] = null
+
+    this.setState({fishes})
+  }
+
   addToOrder(key) {
     // copy order state
     const order = {...this.state.order}
@@ -76,6 +86,14 @@ class App extends React.Component {
     order[key] = order[key] + 1 || 1
 
     // shorthand for this.setState({order: order})
+    this.setState({order})
+  }
+
+  removeFromOrder(key) {
+    const order = {...this.state.order}
+
+    delete order[key]
+
     this.setState({order})
   }
 
@@ -91,8 +109,8 @@ class App extends React.Component {
             }
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order} />
-        <Inventory fishes={this.state.fishes} addFish={this.addFish} updateFish={this.updateFish} loadSamples={this.loadSamples} />
+        <Order fishes={this.state.fishes} order={this.state.order} removeFromOrder={this.removeFromOrder} />
+        <Inventory fishes={this.state.fishes} addFish={this.addFish} updateFish={this.updateFish} removeFish={this.removeFish} loadSamples={this.loadSamples} />
       </div>
     )
   }
