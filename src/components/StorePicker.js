@@ -7,6 +7,7 @@ class StorePicker extends React.Component {
     e.preventDefault()
     this.context.router.transitionTo(`/store/${this.storeInput.value}`)
   }
+  
   render() {
     return (
       <form className='store-selector' onSubmit={(e) => this.goToStore(e)}>
